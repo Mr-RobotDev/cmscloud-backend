@@ -41,6 +41,7 @@ export class User extends Document {
     type: String,
     trim: true,
     unique: true,
+    sparse: true,
   })
   phone?: string;
 
