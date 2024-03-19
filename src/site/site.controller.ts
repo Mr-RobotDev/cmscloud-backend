@@ -5,7 +5,6 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
   Put,
   UploadedFiles,
   UseInterceptors,
@@ -58,10 +57,5 @@ export class SiteController {
     @Body() updateSiteDto: UpdateSiteDto,
   ) {
     return this.siteService.updateSite(site, updateSiteDto);
-  }
-
-  @Delete(':site')
-  removeSite(@Param('site') site: string) {
-    return this.siteService.removeSite(site);
   }
 }

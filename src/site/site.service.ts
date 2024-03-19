@@ -22,8 +22,4 @@ export class SiteService {
   updateSite(id: string, update: UpdateQuery<Site>) {
     return this.siteModel.findByIdAndUpdate(id, update, { new: true });
   }
-
-  removeSite(id: string) {
-    return this.siteModel.findByIdAndDelete(id);
-  }
 }
