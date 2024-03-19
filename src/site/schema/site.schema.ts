@@ -1,6 +1,10 @@
-import { Prop, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import toJSON from '../../common/plugins/toJSON.plugin';
 
+@Schema({
+  timestamps: true,
+})
 export class Site extends Document {
   @Prop({
     type: String,
@@ -86,3 +90,5 @@ export class Site extends Document {
 }
 
 export const SiteSchema = SchemaFactory.createForClass(Site);
+
+SiteSchema.plugin(toJSON);
