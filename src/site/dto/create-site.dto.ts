@@ -5,6 +5,7 @@ export class CreateSiteDto {
   latitude: number;
   siteId: string;
   customerName: string;
+  url: string;
   attachments?: string[];
   notesBox?: string;
   hostId?: string;
