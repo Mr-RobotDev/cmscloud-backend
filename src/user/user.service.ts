@@ -7,7 +7,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, UpdateQuery } from 'mongoose';
 import { compare } from 'bcrypt';
 import { User } from './schema/user.schema';
-import { SignUpDto } from '../auth/dto/signup.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
 import { Account } from '../common/interfaces/account.interface';
 
@@ -17,12 +16,6 @@ export class UserService {
     @InjectModel(User.name)
     private readonly userModel: Model<User>,
   ) {}
-
-  createUser(signupDto: SignUpDto): Promise<User> {
-    return this.userModel.create({
-      ...signupDto,
-    });
-  }
 
   getUserByEmail(email: string): Promise<User> {
     return this.userModel.findOne({ email });

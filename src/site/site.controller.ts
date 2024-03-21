@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Patch,
   Param,
@@ -12,7 +11,6 @@ import {
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { SiteService } from './site.service';
 import { MediaService } from '../media/media.service';
-import { CreateSiteDto } from './dto/create-site.dto';
 import { UpdateSiteDto } from './dto/update-site.dto';
 import { Folder } from '../common/enums/folder.enum';
 
@@ -25,11 +23,6 @@ export class SiteController {
     private readonly siteService: SiteService,
     private readonly mediaService: MediaService,
   ) {}
-
-  @Post()
-  createSite(@Body() createSiteDto: CreateSiteDto) {
-    return this.siteService.createSite(createSiteDto);
-  }
 
   @Get()
   sites() {

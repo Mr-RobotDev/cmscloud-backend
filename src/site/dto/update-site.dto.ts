@@ -1,4 +1,9 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateSiteDto } from './create-site.dto';
-
-export class UpdateSiteDto extends PartialType(CreateSiteDto) {}
+export class UpdateSiteDto {
+  notesBox?: string;
+  hostId?: string;
+  platformUsername?: string;
+  platformPassword?: string;
+  stationUsername?: string;
+  stationPassword?: string;
+  systemPassphrase?: string;
+}
