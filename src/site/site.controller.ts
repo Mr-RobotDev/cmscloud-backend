@@ -35,12 +35,12 @@ export class SiteController {
     @Param('site') site: string,
     @UploadedFiles() files: Array<Express.Multer.File>,
   ) {
+    await this.siteService.getSiteById(site);
     const attachments = await Promise.all(
       files.map((file) =>
         this.mediaService.uploadFile(file, Folder.ATTACHMENTS),
       ),
     );
-    await this.siteService.updateSite(site, { $addToSet: { attachments } });
     return { attachments };
   }
 

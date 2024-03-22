@@ -1,4 +1,5 @@
 export class UpdateSiteDto {
+  attachments?: string[];
   notesBox?: string;
   hostId?: string;
   platformUsername?: string;

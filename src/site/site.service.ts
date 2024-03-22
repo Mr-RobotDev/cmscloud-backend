@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, UpdateQuery } from 'mongoose';
 import { Site } from './schema/site.schema';
@@ -12,6 +12,14 @@ export class SiteService {
 
   sites() {
     return this.siteModel.find();
+  }
+
+  async getSiteById(id: string) {
+    const site = await this.siteModel.findById(id);
+    if (!site) {
+      throw new NotFoundException('Site not found');
+    }
+    return site;
   }
 
   updateSite(id: string, update: UpdateQuery<Site>) {
