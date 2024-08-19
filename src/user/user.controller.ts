@@ -1,9 +1,12 @@
-import { Body, Controller, Get, Patch } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CurrentUser } from '../common/decorators/current-user.decorator';
-import { Account } from '../common/interfaces/account.interface';
+import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
+import { CurrentUser } from '../common/decorators/current-user.decorator';
+import { Roles } from '../common/decorators/roles.decorator';
+import { Role } from '../common/enums/role.enum';
+import { Account } from '../common/interfaces/account.interface';
 
 @Controller({
   path: 'users',
@@ -11,6 +14,12 @@ import { UpdatePasswordDto } from './dto/update-password.dto';
 })
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Roles(Role.ADMIN)
+  @Post()
+  createUser(@Body() createUserDto: CreateUserDto) {
+    return this.userService.createUser(createUserDto);
+  }
 
   @Get('/me')
   getMe(@CurrentUser() account: Account) {

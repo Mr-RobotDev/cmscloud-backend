@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 import { Role, RoleValues } from '../../common/enums/role.enum';
+import toJSON from '../../common/plugins/toJSON.plugin';
 
 @Schema({
   timestamps: true,
@@ -48,12 +49,14 @@ export class User extends Document {
   @Prop({
     required: true,
     enum: RoleValues,
-    default: Role.SUPER_ADMIN,
+    default: Role.ADMIN,
   })
   role: Role;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
+
+UserSchema.plugin(toJSON);
 
 UserSchema.pre<User>('save', async function (next) {
   if (!this.isModified('password')) {
